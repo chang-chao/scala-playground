@@ -18,18 +18,14 @@ object MapDemo extends App {
   // https://commitlogs.com/2016/09/10/scala-fold-foldleft-and-foldright/
   val bitmap = map.values.fold(0) {
     (a, b) =>
-      {
-        val bitPos = 1 << mask(b, shift);
-        a | bitPos;
-      }
+      val bitPos = 1 << mask(b, shift);
+      a | bitPos;
   };
 
   val indexMap = map.mapValues { hash =>
-    {
-      val bitPos = 1 << mask(hash, shift);
-      val i = index(bitmap, bitPos);
-      i;
-    }
+    val bitPos = 1 << mask(hash, shift);
+    val i = index(bitmap, bitPos);
+    i;
   };
 
   println(indexMap) // Map(A -> 1, B -> 0)
